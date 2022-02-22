@@ -18,7 +18,7 @@ namespace ChroMapper_VRMAvatar.Component
         private void Start()
         {
             AddVRMShaders.Initialize(Path.Combine(Environment.CurrentDirectory, "Player2VRM.shaders"));
-            Debug.Log("Shaders Inport");
+            Debug.Log("Shaders Import");
             LoadModelAsync(Path.Combine(Environment.CurrentDirectory, "AliciaSolid.vrm"));
         }
     }
