@@ -30,3 +30,5 @@ ChroMapperのUnityプロジェクトにUniVRMのパッケージをインポー�
 どうもChroMapperがURP(Universal Render Pipeline)を使ってるのが原因ぽい。
 - [Unity2021.2.4f1のURPで、OpenXRのみでVRアプリ開発をする](https://qiita.com/Kazu_Sack/items/776accbe1e8582b3d735)
 - [VRoidのモデルのマテリアルをURP対応のマテリアルに変更してみた](https://qiita.com/carnaite0224/items/59537e4b2ce4a9bd0eb9)
+- [URP/HDRPを使ったVRM対応アプリの開発方法 / VRM Importer Extension](https://speakerdeck.com/sotanmochi/vrm-importer-extension)
+- [VRMImporterExtension-URP](https://github.com/sotanmochi/VRMImporterExtension-URP)
