@@ -25,3 +25,8 @@ DLLフォルダのDLLは、UniVRMの`UniVRM_Samples-0.95.1_6465.unitypackage`を
 ChroMapperのUnityプロジェクトにUniVRMのパッケージをインポートして、`AliciaSolid.vrm`を読み込んでも同様にピンクになるので、根本的なところが問題あるんじゃないかと思っている。
 
 ほとんどの人はVRMでアバター表示しているので、VRM対応したいところだけど、なにぶん私がアバター周りを触ってこなかったのでサッパリです。とりあえず、カスタムアバターなら読めるので、優先度は低い感じです。
+
+### 2022/02/23
+どうもChroMapperがURP(Universal Render Pipeline)を使ってるのが原因ぽい。
+- [Unity2021.2.4f1のURPで、OpenXRのみでVRアプリ開発をする](https://qiita.com/Kazu_Sack/items/776accbe1e8582b3d735)
+- [VRoidのモデルのマテリアルをURP対応のマテリアルに変更してみた](https://qiita.com/carnaite0224/items/59537e4b2ce4a9bd0eb9)
