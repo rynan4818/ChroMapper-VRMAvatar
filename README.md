@@ -37,7 +37,8 @@ ChroMapperのUnityプロジェクトにUniVRMのパッケージをインポー�
 結構難易度高めなのと、上手く行かない場合は手動でモデルのシェーダーを変更する必要があるので、CameraMovement用のカスタムアバターの作成を補助する方向に考えた方が良いのでは無いかと思ってます。
 
 - CameraMovementで使えるカスタムアバターの条件
-    - モデルのルートのPrefab名が`_CustomAvatar`であること
+    - モデルのルートGameObject名、またはPrefab名が`_CustomAvatar`であること
+        `request.assetBundle.LoadAssetWithSubAssetsAsync<GameObject>("_CustomAvatar");`で読めること。
     - AssetBundleで出力されていること
     - シェーダーが[BeatSaber/Unlit Glow](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/sh_custom_unlit.shader)、[BeatSaber/Lit Glow](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/sh_custom_lit.shader)、[BeatSaber/Standard](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/bs_standard.shader)であればChroMapperで持ってるのでこれらを使用すること。
 
