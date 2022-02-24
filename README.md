@@ -32,3 +32,13 @@ ChroMapperのUnityプロジェクトにUniVRMのパッケージをインポー�
 - [VRoidのモデルのマテリアルをURP対応のマテリアルに変更してみた](https://qiita.com/carnaite0224/items/59537e4b2ce4a9bd0eb9)
 - [URP/HDRPを使ったVRM対応アプリの開発方法 / VRM Importer Extension](https://speakerdeck.com/sotanmochi/vrm-importer-extension)
 - [VRMImporterExtension-URP](https://github.com/sotanmochi/VRMImporterExtension-URP)
+
+このあたりを参考に、プラグインで読み込み時にURP対応のシェーダーに変換すれば表示可能ぽい。
+結構難易度高めなのと、上手く行かない場合は手動でモデルのシェーダーを変更する必要があるので、CameraMovement用のカスタムアバターの作成を補助する方向に考えた方が良いのでは無いかと思ってます。
+
+- CameraMovementで使えるカスタムアバターの条件
+    - モデルのルートのGameObject名が`_CustomAvatar`であること
+    - AssetBundleで出力されていること
+    - シェーダーが[BeatSaber/Unlit Glow](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/sh_custom_unlit.shader)、[BeatSaber/Lit Glow](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/sh_custom_lit.shader)、[BeatSaber/Standard](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/bs_standard.shader)であればChroMapperで持ってるのでこれらを使用すること。
+
+なので、上記3つのシェーダーと選択したモデルのルートオブジェクトを`_CustomAvatar`でAssetBundle出力するエディタスクリプトを作成したインポートできるプロジェクトを作成すれば、任意のUnityプロジェクトで出力できるので良いのかなと思っています。シェーダーとテクスチャの張替え作業は必要ですが。
