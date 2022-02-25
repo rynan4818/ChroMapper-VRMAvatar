@@ -43,3 +43,6 @@ ChroMapperのUnityプロジェクトにUniVRMのパッケージをインポー�
     - シェーダーが[BeatSaber/Unlit Glow](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/sh_custom_unlit.shader)、[BeatSaber/Lit Glow](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/sh_custom_lit.shader)、[BeatSaber/Standard](https://github.com/Caeden117/ChroMapper/blob/master/Assets/_Graphics/Shaders/Beat%20Saber/bs_standard.shader)であればChroMapperで持ってるのでこれらを使用すること。
 
 なので、上記3つのシェーダーと選択したモデルのルートオブジェクトを`_CustomAvatar`でAssetBundle出力するエディタスクリプトを作成したインポートできるプロジェクトを作成すれば、任意のUnityプロジェクトで出力できるので良いのかなと思っています。シェーダーとテクスチャの張替え作業は必要ですが。
+
+### 2022/02/24
+[CameraMovementAvatarExporter](https://github.com/rynan4818/CameraMovementAvatarExporter)を作ったので、VRM直接読み込みは断念します。
