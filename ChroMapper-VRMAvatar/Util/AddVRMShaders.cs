@@ -11,6 +11,12 @@ namespace ChroMapper_VRMAvatar.Util
 
         public static void Initialize(string shadersFile)
         {
+            var installShaders = Resources.FindObjectsOfTypeAll(typeof(Shader));
+            foreach (var installShader in installShaders)
+            {
+                if (installShader.name == "UniGLTF/UniUnlit")
+                    return;
+            }
             var bundlePath = Path.Combine(Environment.CurrentDirectory, shadersFile);
             if (File.Exists(bundlePath))
             {

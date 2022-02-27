@@ -32,7 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\VRMAvatarController.cs" />
+    <Compile Include="Configuration\Options.cs" />
+    <Compile Include="UserInterface\UI.cs" />
     <Compile Include="Util\AddVRMShaders.cs" />
+    <Compile Include="Util\SimpleJSON.cs" />
+    <Reference Include="FileBrowser">
+      <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\FileBrowser.dll</HintPath>
+    </Reference>
     <Reference Include="Main">
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\Main.dll</HintPath>
     </Reference>
@@ -68,6 +74,10 @@
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
@@ -131,7 +141,9 @@
       <HintPath>DLL\VRMShaders.GLTF.IO.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetPath)" "$(ChroMapperDir)\Plugins"</PostBuildEvent>
