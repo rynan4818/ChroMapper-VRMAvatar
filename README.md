@@ -9,7 +9,7 @@ BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapp
 1. [リリースページ](https://github.com/rynan4818/ChroMapper-VRMAvatar/releases)から、最新版のプラグインのzipファイルをダウンロードして下さい。
 
 2. ダウンロードしたzipファイルを解凍して以下の通りファイルをコピーして下さい。
-    - `ChroMapperのインストールフォルダ`(※CML.exeでは無いです)に以下の８つのライブラリファイルをコピーします。
+    - `ChroMapperのインストールフォルダ`(ChroMapper.exe があるフォルダ ※CML.exeでは無いです)に以下の７つのライブラリファイルをコピーします。
         - netstandard.dll
         - UniGLTF.dll
         - UniHumanoid.dll
