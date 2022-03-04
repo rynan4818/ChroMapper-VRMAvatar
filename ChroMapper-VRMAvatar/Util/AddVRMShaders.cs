@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,24 +8,21 @@ namespace ChroMapper_VRMAvatar.Util
     {
         public static Dictionary<string, Shader> Shaders { get; } = new Dictionary<string, Shader>();
 
-        public static void Initialize(string shadersFile)
+        public static void Initialize(string resourcePath, string installCheckShader)
         {
             var installShaders = Resources.FindObjectsOfTypeAll(typeof(Shader));
             foreach (var installShader in installShaders)
             {
-                if (installShader.name == "UniGLTF/UniUnlit")
+                if (installShader.name == installCheckShader)
                     return;
             }
-            var bundlePath = Path.Combine(Environment.CurrentDirectory, shadersFile);
-            if (File.Exists(bundlePath))
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
+            var assetBundle = AssetBundle.LoadFromStream(stream);
+            var assets = assetBundle.LoadAllAssets<Shader>();
+            foreach (var asset in assets)
             {
-                var assetBundle = AssetBundle.LoadFromFile(bundlePath);
-                var assets = assetBundle.LoadAllAssets<Shader>();
-                foreach (var asset in assets)
-                {
-                    UnityEngine.Debug.Log("Add Shader: " + asset.name);
-                    Shaders.Add(asset.name, asset);
-                }
+                Debug.Log("Add Shader: " + asset.name);
+                Shaders.Add(asset.name, asset);
             }
         }
     }

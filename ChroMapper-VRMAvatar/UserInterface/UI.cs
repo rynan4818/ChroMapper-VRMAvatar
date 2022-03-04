@@ -12,14 +12,16 @@ namespace ChroMapper_VRMAvatar.UserInterface
 {
     public class UI
     {
-        public readonly ExtensionButton _extensionBtn = new ExtensionButton();
+        public static readonly ExtensionButton _extensionBtn = new ExtensionButton();
+        public static UI instance;
         public static GameObject _MainMenu;
         public static VRMAvatarController vrmAvatarController;
         public UITextInput vrmFileInputText;
 
         public UI()
         {
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ChroMapper_VRMAvatar.Icon.png");
+            instance = this;
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ChroMapper_VRMAvatar.Resources.Icon.png");
             byte[] data = new byte[stream.Length];
             stream.Read(data, 0, (int)stream.Length);
 
@@ -30,18 +32,14 @@ namespace ChroMapper_VRMAvatar.UserInterface
             _extensionBtn.Tooltip = "VRMAvatar";
             ExtensionButtons.AddButton(_extensionBtn);
         }
-        public void ExtensionButtonEnable()
+        public static void ExtensionButtonEnable()
         {
             _extensionBtn.Visible = true;
         }
-        public void ExtensionButtonDisable()
+        public static void ExtensionButtonDisable()
         {
             _extensionBtn.Visible = false;
             _MainMenu.SetActive(false);
-        }
-        public void VRMAvatarControllerSet()
-        {
-            vrmAvatarController = GameObject.Find("/VRMAvatar").gameObject.GetComponent<VRMAvatarController>();
         }
 
         public void AddMenu(MapEditorUI mapEditorUI)
@@ -90,7 +88,7 @@ namespace ChroMapper_VRMAvatar.UserInterface
 
             var reloadButton = AddButton(_MainMenu.transform, "Reload", "Reload", new Vector2(0, -170), () =>
             {
-                vrmAvatarController.LoadModelAsync();
+                VRMAvatarController.LoadModelAsync();
             });
             MoveTransform(reloadButton.transform, 40, 20, 1, 1, -80, -65);
 
@@ -192,7 +190,7 @@ namespace ChroMapper_VRMAvatar.UserInterface
             var vrmEnableCheck = AddCheckbox(_MainMenu.transform, "VRMAvatar Enable", "VRMAvatar Enable", new Vector2(0, -170), Options.Instance.avatarEnable, (check) =>
             {
                 Options.Instance.avatarEnable = check;
-                vrmAvatarController.AvatarEnableChange();
+                VRMAvatarController.AvatarEnableChange();
             });
             MoveTransform(vrmEnableCheck.Item3.transform, 30, 16, 0, 1, 40, -150);
             MoveTransform(vrmEnableCheck.Item1, 100, 16, 0, 1, 95, -150);

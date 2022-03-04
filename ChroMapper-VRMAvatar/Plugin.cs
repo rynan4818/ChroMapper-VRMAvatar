@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,18 +12,19 @@ namespace ChroMapper_VRMAvatar
     public class Plugin
     {
         public static VRMAvatarController vrmAvatarController;
-        private static Harmony _harmony;
+        public static Harmony _harmony;
+        public static UI _ui;
         public const string HARMONY_ID = "com.github.rynan4818.ChroMapper-VRMAvatar";
-        private UI _ui;
 
         [Init]
         private void Init()
         {
-            _ui = new UI();
             _harmony = new Harmony(HARMONY_ID);
             _harmony.PatchAll(Assembly.GetExecutingAssembly());
             Debug.Log("VRMAvatar: Plugin has loaded!");
             SceneManager.sceneLoaded += SceneLoaded;
+            AddVRMShaders.Initialize("ChroMapper_VRMAvatar.Resources.vrmavatar.shaders", "UniGLTF/UniUnlit");
+            _ui = new UI();
         }
 
         [Exit]
@@ -41,12 +40,8 @@ namespace ChroMapper_VRMAvatar
                 if (vrmAvatarController != null && vrmAvatarController.isActiveAndEnabled)
                     return;
                 vrmAvatarController = new GameObject("VRMAvatar").AddComponent<VRMAvatarController>();
-                _ui.VRMAvatarControllerSet();
-                MapEditorUI mapEditorUI = UnityEngine.Object.FindObjectOfType<MapEditorUI>();
+                MapEditorUI mapEditorUI = Object.FindObjectOfType<MapEditorUI>();
                 _ui.AddMenu(mapEditorUI);
-                VRMAvatarController._plugin = this;
-                VRMAvatarController._ui = this._ui;
-                AddVRMShaders.Initialize(Path.Combine(Environment.CurrentDirectory, "vrmavatar.shaders"));
             }
         }
     }

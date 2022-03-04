@@ -17,11 +17,9 @@ namespace ChroMapper_VRMAvatar.Component
         public static VRMLookAtHead lookAt { private set; get; }
         public static Blinker m_blink { private set; get; }
         public static Animation animation { private set; get; }
-        public static Plugin _plugin { internal set; get; }
-        public static UI _ui { internal set; get; }
         public static bool externalControl { get; set; }
 
-        public async void LoadModelAsync()
+        public static async void LoadModelAsync()
         {
             if (!File.Exists(Options.Instance.vrmAvatarFileName))
             {
@@ -87,7 +85,7 @@ namespace ChroMapper_VRMAvatar.Component
             Options.Instance.avatarLookAt = lookAt;
         }
 
-        public void AvatarEnableChange()
+        public static void AvatarEnableChange()
         {
             if (Options.Instance.avatarEnable)
             {
@@ -114,11 +112,11 @@ namespace ChroMapper_VRMAvatar.Component
             externalControl = GameObject.Find("VRMAvatarExternalControls") != null;
             if (externalControl)
             {
-                _ui.ExtensionButtonDisable();
+                UI.ExtensionButtonDisable();
             }
             else
             {
-                _ui.ExtensionButtonEnable();
+                UI.ExtensionButtonEnable();
             }
             if (!externalControl)
                 AvatarEnableChange();
