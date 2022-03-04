@@ -8,21 +8,16 @@ BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapp
 # インストール方法
 1. [リリースページ](https://github.com/rynan4818/ChroMapper-VRMAvatar/releases)から、最新版のプラグインのzipファイルをダウンロードして下さい。
 
-2. ダウンロードしたzipファイルを解凍して以下の通りファイルをコピーして下さい。
-    - `ChroMapperのインストールフォルダ`(ChroMapper.exe があるフォルダ ※CML.exeでは無いです)に以下の７つのライブラリファイルをコピーします。
-        - netstandard.dll
-        - UniGLTF.dll
-        - UniHumanoid.dll
-        - VRM.dll
-        - VRMShaders.GLTF.IO.Runtime.dll
-        - VRMShaders.GLTF.UniUnlit.Runtime.dll
-        - vrmavatar.shaders
-    - `Plugins` フォルダに本プラグインをコピーします。
-        - ChroMapper-VRMAvatar.dll
+2. ダウンロードしたzipファイルを解凍してChroMapperのインストールフォルダにある`Plugins`フォルダに`ChroMapper-VRMAvatar.dll`をコピーします。
 
-    ライブラリのDLLファイルは`ChroMapper_Data\Managed`フォルダでも動作しますが、`vrmavatar.shaders`は ChroMapper.exe があるフォルダに必ずコピーして下さい。
-    
-    `ChroMapper-CameraMovement`とライブラリを共有しているため、ChroMapper-CameraMovementのVRM対応バージョンの方は`ChroMapper-VRMAvatar.dll`だけコピーで構いません。
+- Ver1.0.0 では以下のファイルをChroMapperのインストールフォルダにコピーしていましたが、Ver1.0.1 よりChroMapper-VRMAvatar.dllに統合したため不要になりました。Ver1.0.0をお使いの方は、不要なため削除して下さい。
+    - netstandard.dll
+    - UniGLTF.dll
+    - UniHumanoid.dll
+    - VRM.dll
+    - VRMShaders.GLTF.IO.Runtime.dll
+    - VRMShaders.GLTF.UniUnlit.Runtime.dll
+    - vrmavatar.shaders
 
 # 使用方法
 譜面を読み込んでエディタ画面を出して下さい。Tabキーを押すと右側にアイコンパネルが出ますので、ピンクの人物アイコンを押すと下の画像の VRMAvatar 設定パネルが開きます。
