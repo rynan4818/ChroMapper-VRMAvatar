@@ -61,14 +61,8 @@ BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapp
 - VRMShaders.GLTF.IO.Runtime.dll
 - VRMShaders.GLTF.UniUnlit.Runtime.dll
 - vrmavatar.shaders
-- netstandard.dll
 
 ライセンス： https://github.com/vrm-c/UniVRM/blob/master/LICENSE.txt
-
-### SimpleJSON
-設定ファイルのJSONパースに[SimpleJSON](https://github.com/Bunny83/SimpleJSON)を使用しています。
-
-ライセンス： https://github.com/Bunny83/SimpleJSON/blob/master/LICENSE
 
 # プラグイン作成の参考
 プラグインでのVRMの表示方法は[Player2VRM](https://github.com/yoship1639/Player2VRM)を参考にさせてもらいました。
