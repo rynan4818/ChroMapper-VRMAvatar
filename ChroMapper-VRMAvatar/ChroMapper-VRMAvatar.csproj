@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\ILMerge.3.0.41\build\ILMerge.props" Condition="Exists('..\packages\ILMerge.3.0.41\build\ILMerge.props')" />
+  <Import Project="..\packages\ILRepack.2.0.34\build\ILRepack.props" Condition="Exists('..\packages\ILRepack.2.0.34\build\ILRepack.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,7 +38,6 @@
     <Compile Include="Configuration\Options.cs" />
     <Compile Include="UserInterface\UI.cs" />
     <Compile Include="Util\AddVRMShaders.cs" />
-    <Compile Include="Util\SimpleJSON.cs" />
     <Reference Include="FileBrowser">
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\FileBrowser.dll</HintPath>
     </Reference>
@@ -48,7 +47,9 @@
     <Reference Include="Input">
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\Input.dll</HintPath>
     </Reference>
-    <Reference Include="netstandard" />
+    <Reference Include="netstandard">
+      <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\netstandard.dll</HintPath>
+    </Reference>
     <Reference Include="Plugins">
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\Plugins.dll</HintPath>
     </Reference>
@@ -148,20 +149,40 @@
     <EmbeddedResource Include="Resources\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <EmbeddedResource Include="Resources\vrmavatar.shaders" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>del "$(TargetName)_org.dll"
+    <PostBuildEvent>if exist "$(TargetName)_org.dll" del "$(TargetName)_org.dll"
+if exist "$(TargetDir)$(TargetName)_org.pdb" del "$(TargetDir)$(TargetName)_org.pdb"
+if $(ConfigurationName)==Release (
+  "$(ILRepack)" /ndebug /targetplatform:v4 /wildcards /lib:"$(ChroMapperDir)\ChroMapper_Data\Managed" /out:"$(TargetDir)$(TargetName)_all.dll" "$(TargetPath)" "$(ProjectDir)DLL\*.dll" /log:"$(TargetDir)$(TargetName).ILRepack.log
+)
+if $(ConfigurationName)==Debug (
+  "$(ILRepack)" /targetplatform:v4 /wildcards /lib:"$(ChroMapperDir)\ChroMapper_Data\Managed" /out:"$(TargetDir)$(TargetName)_all.dll" "$(TargetPath)" "$(ProjectDir)DLL\*.dll" /log:"$(TargetDir)$(TargetName).ILRepack.log
+)
+if exist "$(TargetDir)$(TargetName).pdb" ren "$(TargetDir)$(TargetName).pdb" "$(TargetName)_org.pdb"
 ren "$(TargetPath)" "$(TargetName)_org.dll"
-"$(ILMergeConsolePath)" /ndebug /targetplatform:v4 /wildcards /lib:"$(ChroMapperDir)\ChroMapper_Data\Managed" /out:"$(TargetPath)" "$(TargetDir)$(TargetName)_org.dll" "$(ProjectDir)DLL\*.dll"
-copy "$(TargetFileName)" "$(ChroMapperDir)\Plugins"</PostBuildEvent>
+if exist "$(TargetDir)$(TargetName)_all.pdb" ren "$(TargetDir)$(TargetName)_all.pdb" "$(TargetName).pdb"
+ren "$(TargetDir)$(TargetName)_all.dll" "$(TargetName).dll"
+copy /Y "$(TargetFileName)" "$(ChroMapperDir)\Plugins"
+if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(TargetDir)$(TargetName).pdb" "$(ChroMapperDir)\Plugins"
+if $(ConfigurationName)==Release (
+  if not exist "$(ProjectDir)ReleasesArchives\Release\Plugins" mkdir "$(ProjectDir)ReleasesArchives\Release\Plugins"
+  copy /Y "$(TargetFileName)" "$(ProjectDir)ReleasesArchives\Release\Plugins"
+  if exist "$(ProjectDir)ReleasesArchives\$(TargetName)-.zip" del "$(ProjectDir)ReleasesArchives\$(TargetName)-.zip"
+  powershell compress-archive -Path "$(ProjectDir)ReleasesArchives\Release\*" -DestinationPath "$(ProjectDir)ReleasesArchives\$(TargetName)-.zip"
+)
+</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ILMerge.3.0.41\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.3.0.41\build\ILMerge.props'))" />
+    <Error Condition="!Exists('..\packages\ILRepack.2.0.34\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.2.0.34\build\ILRepack.props'))" />
   </Target>
 </Project>

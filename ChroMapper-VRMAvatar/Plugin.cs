@@ -30,7 +30,7 @@ namespace ChroMapper_VRMAvatar
         [Exit]
         private void Exit()
         {
-            _harmony.UnpatchAll(HARMONY_ID);
+            _harmony.UnpatchSelf();
             Debug.Log("VRMAvatar: Application has closed!");
         }
         private void SceneLoaded(Scene arg0, LoadSceneMode arg1)

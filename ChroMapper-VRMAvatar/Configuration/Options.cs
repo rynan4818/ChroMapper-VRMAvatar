@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.IO;
 using ChroMapper_VRMAvatar.Component;
-using ChroMapper_VRMAvatar.Util.SimpleJSON;
+using SimpleJSON;
 using UnityEngine;
 
 namespace ChroMapper_VRMAvatar.Configuration
